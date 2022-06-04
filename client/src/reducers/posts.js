@@ -1,12 +1,14 @@
-export default (posts = [], actions) => {
-  switch (actions.type) {
+export default (posts = [], action) => {
+  switch (action.type) {
+    case 'DELETE':
+      return posts.filter(post => post._id !== action.payload);
     case 'FETCH_ALL':
-      return actions.payload;
+      return action.payload;
     case 'CREATE':
-      return [...posts, actions.payload];
+      return [...posts, action.payload];
     case 'UPDATE':
       return posts.map(post =>
-        post._id === actions.payload._id ? actions.payload : post,
+        post._id === action.payload._id ? action.payload : post,
       );
     default:
       return posts;
