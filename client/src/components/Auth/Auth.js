@@ -8,7 +8,7 @@ import {
   Container,
 } from '@material-ui/core';
 import useStyles from './styles';
-import {GoogleLogin} from 'react-google-login';
+import {GoogleLogin, GoogleLogout} from 'react-google-login';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Input from './Input';
 import Icon from './icon';
@@ -92,21 +92,22 @@ const Auth = () => {
           </Button>
           <GoogleLogin
             clientId="310101506890-ps8kjro18ta1ad1vcg7i9sfpcn1tcqia.apps.googleusercontent.com"
-            render={renderProps => (
-              <Button
-                className={classes.googleButton}
-                color="primary"
-                fullWidth
-                onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
-                startIcon={<Icon />}
-                variant="contained">
-                Google Sign In
-              </Button>
-            )}
+            // render={renderProps => (
+            //   <Button
+            //     className={classes.googleButton}
+            //     color="primary"
+            //     fullWidth
+            //     onClick={renderProps.onClick}
+            //     disabled={renderProps.disabled}
+            //     startIcon={<Icon />}
+            //     variant="contained">
+            //     Google Sign In
+            //   </Button>
+            // )}
             onSuccess={googleSuccess}
             onFailure={googleError}
             cookiePolicy="single_host_origin"
+            isSignedIn={true}
           />
 
           <Grid container justifyContent="flex-end">
