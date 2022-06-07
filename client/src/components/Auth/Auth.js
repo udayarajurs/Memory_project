@@ -29,7 +29,8 @@ const Auth = () => {
   const googleSuccess = res => {
     console.log(res);
   };
-  const googleFailure = () => {
+  const googleError = error => {
+    console.log(error);
     console.log('google failure');
   };
 
@@ -90,7 +91,7 @@ const Auth = () => {
             {isSignup ? 'Sign Up' : 'Sign In'}
           </Button>
           <GoogleLogin
-            clientId="646398066743-840d9hjng5gcnjnv9mb6gjnn7njse61s.apps.googleusercontent.com"
+            clientId="673855574202-7mktuvlpsh64jf2htjsmk89u3iope8mg.apps.googleusercontent.com"
             render={renderProps => (
               <Button
                 className={classes.googleButton}
@@ -104,7 +105,7 @@ const Auth = () => {
               </Button>
             )}
             onSuccess={googleSuccess}
-            onFailure={googleFailure}
+            onFailure={googleError}
             cookiePolicy="single_host_origin"
           />
 
