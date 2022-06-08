@@ -10,18 +10,27 @@ import {
 import useStyles from './styles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Input from './Input';
+import {useHistory} from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
-import Icon from './icon';
+import {useDispatch} from 'react-redux';
 
 const Auth = () => {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   function handleCallbackResponse(response) {
-    console.log(' Encode JWT ID token: ' + response.credential);
-    var userObject = jwt_decode(response.credential);
-    console.log(userObject);
+    const result = jwt_decode(response?.credential);
+    const token = 'TOKEN';
+
+    try {
+      dispatch({type: 'AUTH', data: {token, result}});
+      history.push('/');
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
@@ -39,6 +48,7 @@ const Auth = () => {
         size: 'large',
       },
     );
+    google.accounts.id.prompt();
   }, []);
 
   const handleSubmit = () => {};
@@ -107,7 +117,7 @@ const Auth = () => {
             {isSignup ? 'Sign Up' : 'Sign In'}
           </Button>
 
-          <Button fullWidth id="signInDiv" className={classes.submit1} />
+          <Button id="signInDiv" className={classes.submit1} />
 
           <Grid container justifyContent="flex-end">
             <Grid item>
