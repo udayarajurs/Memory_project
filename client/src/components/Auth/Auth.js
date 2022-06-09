@@ -13,7 +13,7 @@ import Input from './Input';
 import {useHistory} from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import {useDispatch} from 'react-redux';
-import { signin, signup } from '../../actions/auth';
+import {signin, signup} from '../../actions/auth';
 
 const initialState = {
   firstname: '',
@@ -77,7 +77,7 @@ const Auth = () => {
     setShowPassword(prevShowPassword => !prevShowPassword);
   const switchMode = () => {
     setIsSignup(prevIsSignup => !prevIsSignup);
-    handleShowPassword(false);
+    setShowPassword(false);
   };
 
   return (

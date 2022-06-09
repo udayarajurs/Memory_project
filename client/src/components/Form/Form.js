@@ -6,12 +6,13 @@ import {useDispatch, useSelector} from 'react-redux';
 import {createPost, updatePost} from '../../actions/posts';
 
 const Form = ({currentID, setCurrentID}) => {
+  const user = JSON.parse(localStorage.getItem('profile'));
   const [postData, setPostData] = useState({
-    creator: '',
     title: '',
     message: '',
     tags: '',
     selectedFile: '',
+    userID: user?.result?._id,
   });
 
   const post = useSelector(state =>
@@ -28,23 +29,34 @@ const Form = ({currentID, setCurrentID}) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (currentID) {
-      dispatch(updatePost(currentID, postData));
+    if (currentID !== null) {
+      dispatch(createPost({...postData, name: user?.result?.name}));
     } else {
-      dispatch(createPost(postData));
+      dispatch(updatePost(currentID, {...postData, name: user?.result?.name}));
     }
     clear();
   };
+
   const clear = () => {
     setCurrentID(null);
     setPostData({
-      creator: '',
       title: '',
       message: '',
       tags: '',
       selectedFile: '',
+      userID: user?.result?._id,
     });
   };
+
+  if (!user?.result?.name) {
+    return (
+      <Paper className={classes.paper}>
+        <Typography variant="h6" align="center">
+          Please Sign In to createyour own memories and like other's memories
+        </Typography>
+      </Paper>
+    );
+  }
 
   return (
     <Paper className={classes.paper}>
@@ -56,14 +68,14 @@ const Form = ({currentID, setCurrentID}) => {
         <Typography variant="h6">{`${
           currentID ? 'Editing' : 'Creating'
         } a Memory`}</Typography>
-        <TextField
+        {/* <TextField
           name="Creator"
           variant="outlined"
           label="Creator"
           fullWidth
           value={postData.creator}
           onChange={e => setPostData({...postData, creator: e.target.value})}
-        />
+        /> */}
         <TextField
           name="title"
           variant="outlined"
