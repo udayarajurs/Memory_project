@@ -6,6 +6,7 @@
   "dependencies": {
     "@material-ui/core": "^4.9.10",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.61",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -13,6 +14,7 @@
     "axios": "^0.27.2",
     "fix": "^0.0.6",
     "jwt-decode": "^3.1.2",
+    "material-ui-chip-input": "^1.1.0",
     "moment": "^2.27.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
