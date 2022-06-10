@@ -7,12 +7,12 @@ import Posts from '../Posts/Posts';
 import Form from '../Form/Form';
 
 const Home = () => {
-  const [currentID, setCurrentID] = useState(null);
-
+  const [currentId, setCurrentId] = useState(0);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getPosts());
-  }, [currentID, dispatch]);
+  }, [currentId, dispatch]);
 
   return (
     <Grow in>
@@ -23,10 +23,10 @@ const Home = () => {
           alignItems="stretch"
           spacing={3}>
           <Grid item xs={12} sm={7}>
-            <Posts setCurrentID={setCurrentID} />
+            <Posts setCurrentId={setCurrentId} />
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Form currentId={currentID} setCurrentID={setCurrentID} />
+            <Form currentId={currentId} setCurrentId={setCurrentId} />
           </Grid>
         </Grid>
       </Container>
