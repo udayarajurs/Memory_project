@@ -7,7 +7,8 @@ import {
   FETCH_BY_SEARCH,
   START_LOADING,
   END_LOADING,
-  FETCH_POST
+  FETCH_POST,
+  COMMENT,
 } from '../constants/actionTypes';
 
 export default (state = {isLoading: true, posts: []}, action) => {
@@ -28,17 +29,32 @@ export default (state = {isLoading: true, posts: []}, action) => {
         ...state,
         posts: action.payload,
       };
-      case FETCH_POST:
-        return {
-          ...state,
-          post: action.payload,
-        };
+    case FETCH_POST:
+      return {
+        ...state,
+        post: action.payload,
+      };
     case LIKE:
       return {
         ...state,
-        posts: state.posts.map(post =>
-          post._id === action.payload._id ? action.payload : post,
-        ),
+        posts: state.posts.map(post => {
+          // change the post that received a comment...
+          if (post._id === action.payload._id) {
+            return action.payload;
+          }
+          // return the post as is...
+          return post;
+        }),
+      };
+    case COMMENT:
+      return {
+        ...state,
+        posts: state.posts.map(post => {
+          if (post._id == +action.payload._id) {
+            return action.payload;
+          }
+          return post;
+        }),
       };
     case CREATE:
       return {...state, posts: [...state.posts, action.payload]};
