@@ -7,13 +7,14 @@ import {
   FETCH_BY_SEARCH,
   START_LOADING,
   END_LOADING,
+  FETCH_POST
 } from '../constants/actionTypes';
 
 export default (state = {isLoading: true, posts: []}, action) => {
   switch (action.type) {
-    case 'START_LOADING':
+    case START_LOADING:
       return {...state, isLoading: true};
-    case 'END_LOADING':
+    case END_LOADING:
       return {...state, isLoading: false};
     case FETCH_ALL:
       return {
@@ -27,6 +28,11 @@ export default (state = {isLoading: true, posts: []}, action) => {
         ...state,
         posts: action.payload,
       };
+      case FETCH_POST:
+        return {
+          ...state,
+          post: action.payload,
+        };
     case LIKE:
       return {
         ...state,
